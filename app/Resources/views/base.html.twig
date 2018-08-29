@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            {% block title %}TodoList{% endblock %}
+        </title>
+        <link rel="stylesheet" href="{{ asset('build/style.css')}} ">
+        {% block stylesheets %}{% endblock %}
+        
+    </head>
+        
+    <body>
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+            <a class="navbar-brand" href="{{url('homepage')}}">TodoList</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    
+                    
+                   {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.pathinfo == '/deconnexion' %}active{% endif %} " href="{{url('logout')}}">Déconnexion</a>
+                        </li>
+                   {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.pathinfo == '/connexion' %}active{% endif %} " href="{{url('login')}}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.pathinfo == '/inscription' %}active{% endif %} " href="{{url('register')}}">Inscription</a>
+                        </li>
+                   {% endif %}
+                    
+                </ul>
+            </div>
+        </nav>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+                
+        {% endblock %}
+        <script src="{{asset('build/app.js')}} "></script>
+    </body>
+</html>

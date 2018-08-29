@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+        <div class="row">
+            <div class="col md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h1>Todo Liste</h1>
+                        <a href="{{url('todo_list_new')}}" class="btn btn-info btn-sm">Ajout Todo</a>
+                    </div>
+                    {% for todo in todos %}
+                        <div class="card-body ">
+                            <div class="row  text-center px-1 ">
+                                <div class="col-md-3 lead">
+                                    {{ todo.title }}
+                                    <br>
+                                    <small>{{ todo.dueDate|date('d/m/Y - h:i')}}</small>
+                                </div>
+                                <div class="col-md-6 lead">
+                                    {{ todo.description }}
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-between">
+                                    <a href="{{url('todo_list_edit',{'id':todo.id})}} " class="btn btn-dark">Editer</a>
+                                    <a href="{{url('todo_list_delete',{'id':todo.id})}} " class="btn btn-danger ">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
