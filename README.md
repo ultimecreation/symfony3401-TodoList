@@ -1,7 +1,6 @@
 Symfony Edition Standard 3.4.*
 
 Ce projet est basé sur la version 3.4 LTS de symfony
-Contenu
 
 But du projet:
 
